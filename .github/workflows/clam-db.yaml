@@ -51,7 +51,7 @@ jobs:
           archs: amd64,ppc64le
           context: .
           containerfiles: |
-            ./clamav/Dockerfile
+            ./Dockerfile
 
       - name: Get ClamAV version
         run: |
