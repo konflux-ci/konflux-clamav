@@ -36,7 +36,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}  # don't break regular rebuilds if linter is updated
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: clamav/Dockerfile
+          dockerfile: Dockerfile
           ignore: DL3041
 
       - name: Set up QEMU
