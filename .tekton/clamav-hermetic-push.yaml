@@ -535,7 +535,6 @@ spec:
       - name: ADDITIONAL_TAGS
         value:
           - "latest-hermetic"
-          - "v1.{{timestamp}}"
       runAfter:
       - build-image-index
       taskRef:
