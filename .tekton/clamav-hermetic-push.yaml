@@ -23,7 +23,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/konflux-ci/clamav-db
+    value: quay.io/redhat-user-workloads/rhtap-integration-tenant/clamav-db-hermetic:{{revision}}
   - name: dockerfile
     value: Dockerfile
   pipelineSpec:
@@ -535,7 +535,6 @@ spec:
       - name: ADDITIONAL_TAGS
         value:
           - "latest-hermetic"
-          - "v1.{{timestamp}}"
       runAfter:
       - build-image-index
       taskRef:
