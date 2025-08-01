@@ -1,6 +1,7 @@
 FROM quay.io/konflux-ci/konflux-test:v1.4.29@sha256:3619ffde751d337d02f1f61c83c5c39eb87d8091dbe5a9af58ea98577fa09461 as konflux-test
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6-1754000177
 
+
 ENV POLICY_PATH="/project"
 # Install required packages
 RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
