@@ -1,4 +1,4 @@
-FROM quay.io/konflux-ci/konflux-test:v1.4.29@sha256:3619ffde751d337d02f1f61c83c5c39eb87d8091dbe5a9af58ea98577fa09461 as konflux-test
+FROM quay.io/konflux-ci/konflux-test:v1.4.34@sha256:62a7bf68015c711e0eb0698c10d203d0393a8e0efa09306f1fce543dea383f3c as konflux-test
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6-1754000177
 
 
