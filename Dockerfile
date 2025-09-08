@@ -59,7 +59,13 @@ RUN sed -i 's|^#LogFile .*|LogFile /var/log/clamav/clamd.log|' /etc/clamd.d/scan
 
 COPY /start-clamd.sh /start-clamd.sh
 
+
+# Copies your code file from your action repository to the filesystem path `/` of the container
+COPY test/selftest.sh /selftest.sh
+
+# Use utils.sh by copying it from the image
 COPY --from=konflux-test /utils.sh /utils.sh
+
 
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 
