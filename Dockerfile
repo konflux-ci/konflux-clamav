@@ -1,11 +1,14 @@
-FROM quay.io/konflux-ci/konflux-test:v1.4.38@sha256:c306aa4b764fcade1cbea8b8f7b6166e3a1289f56e03be99f669b9aaf7a92363 as konflux-test
+FROM quay.io/konflux-ci/konflux-test:v1.4.42@sha256:c306aa4b764fcade1cbea8b8f7b6166e3a1289f56e03be99f669b9aaf7a92363 as konflux-test
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6-1754000177
-
+#FROM registry.redhat.io/openshift4/ose-tools-rhel9@sha256:ea1416d4260cc62a830c013754ae9720561b1e6c9c8da0e198ebae67783e8a1c as oc-bin
+#FROM registry.access.redhat.com/ubi9/ubi:9.6-1756915113
 
 ENV POLICY_PATH="/project"
 # Install required packages
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
+RUN rpm --import /cachi2/output/deps/generic/RPM-GPG-KEY-EPEL-9 && \
+    #dnf install -y epel-release && \
     microdnf -y --setopt=tsflags=nodocs install \
+    --setopt=install_weak_deps=0 \
     clamav \
     clamd \
     clamav-server \
@@ -15,6 +18,9 @@ RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.
     skopeo \
     findutils \
     && microdnf clean all
+
+# Verify GPG keys are present
+RUN ls /etc/pki/rpm-gpg
 
 # Add clamav user and group
 RUN groupadd -r clamav && useradd -r -g clamav clamav
@@ -59,18 +65,16 @@ RUN sed -i 's|^#LogFile .*|LogFile /var/log/clamav/clamd.log|' /etc/clamd.d/scan
 
 COPY /start-clamd.sh /start-clamd.sh
 
-
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY test/selftest.sh /selftest.sh
 
 # Use utils.sh by copying it from the image
 COPY --from=konflux-test /utils.sh /utils.sh
 
-
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 
 # Update ClamAV virus definitions
-RUN freshclam
+#RUN freshclam
 
 COPY /whitelist.ign2 /var/lib/clamav/whitelist.ign2
 
@@ -78,10 +82,10 @@ COPY --from=konflux-test project $POLICY_PATH
 
 
 # Download and install oc
-RUN ARCH="$(uname -m)" && \
-    curl -fsSL https://mirror.openshift.com/pub/openshift-v4/"$ARCH"/clients/ocp/stable/openshift-client-linux.tar.gz --output oc.tar.gz && \
-    cp oc.tar.gz /usr/bin/oc && \
-    tar -xzvf oc.tar.gz -C /usr/bin && \
-    rm oc.tar.gz
+#RUN ARCH="$(uname -m)" && \
+#    curl -fsSL https://mirror.openshift.com/pub/openshift-v4/"$ARCH"/clients/ocp/stable/openshift-client-linux.tar.gz --output oc.tar.gz && \
+#    cp oc.tar.gz /usr/bin/oc && \
+#    tar -xzvf oc.tar.gz -C /usr/bin && \
+#    rm oc.tar.gz
 
 ENTRYPOINT ["/start-clamd.sh"]
