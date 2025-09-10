@@ -1,0 +1,59 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: konflux-clamav-self-test
+spec:
+  description: |
+    The clamav-db integration pipeline runs the selftest.sh script within the newly built clamav-db container image.
+    This verifies that the ClamAV functionality works correctly in the built image.
+  params:
+    - description: |
+        Spec section of a Snapshot resource. Not all fields of the
+        resource are required. A minimal example:
+          {
+            "components": [
+              {
+                "containerImage": "quay.io/example/repo:latest",
+                "source": {
+                  "git": {
+                    "url": "https://github.com/org/repo",
+                    "revision": "6c1cbf4193930582d998770411f81d5c70aea29b"
+                  }
+                }
+              }
+            ]
+          }
+      name: SNAPSHOT
+      type: string
+  tasks:
+    - name: test-metadata
+      taskRef:
+        resolver: git
+        params:
+          - name: url
+            value: https://github.com/konflux-ci/tekton-integration-catalog.git
+          - name: revision
+            value: main
+          - name: pathInRepo
+            value: /tasks/test-metadata/0.1/test-metadata.yaml
+      params:
+        - name: SNAPSHOT
+          value: $(params.SNAPSHOT)
+        - name: test-name
+          value: "clamav-db"
+    - name: clamav-self-test
+      runAfter:
+        - test-metadata
+      taskSpec:
+        results:
+          - description: Tekton task test output.
+            name: TEST_OUTPUT
+        steps:
+          - name: self-test
+            image: "$(tasks.test-metadata.results.container-image)"
+            script: |
+              #!/usr/bin/env bash
+              set -euo pipefail
+              . /utils.sh
+              trap 'handle_error $(results.TEST_OUTPUT.path)' EXIT
+              /selftest.sh
