@@ -1,11 +1,12 @@
-FROM quay.io/konflux-ci/konflux-test:v1.4.38@sha256:c306aa4b764fcade1cbea8b8f7b6166e3a1289f56e03be99f669b9aaf7a92363 as konflux-test
+FROM quay.io/konflux-ci/konflux-test:v1.4.37@sha256:09328e5f47da168ffe951ec9c4242cd6761e61e0a235df1bba3f5158e757446d as konflux-test
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.6-1754000177
 
+#RUN rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* --root "${NEWROOT}"
+#RUN microdnf install -y "--installroot=${NEWROOT}" bash
 
 ENV POLICY_PATH="/project"
 # Install required packages
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
-    microdnf -y --setopt=tsflags=nodocs install \
+RUN microdnf -y --setopt=tsflags=nodocs install \
     clamav \
     clamd \
     clamav-server \
@@ -59,13 +60,7 @@ RUN sed -i 's|^#LogFile .*|LogFile /var/log/clamav/clamd.log|' /etc/clamd.d/scan
 
 COPY /start-clamd.sh /start-clamd.sh
 
-
-# Copies your code file from your action repository to the filesystem path `/` of the container
-COPY test/selftest.sh /selftest.sh
-
-# Use utils.sh by copying it from the image
 COPY --from=konflux-test /utils.sh /utils.sh
-
 
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 
