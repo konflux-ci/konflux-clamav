@@ -26,6 +26,8 @@ spec:
     value: quay.io/redhat-user-workloads/rh-ee-jcullina-tenant/test-clam-new-task-ce0b4:{{revision}}
   - name: dockerfile
     value: Dockerfile
+  - name: hermetic
+    value: "true"
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
