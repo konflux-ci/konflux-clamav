@@ -193,6 +193,9 @@ spec:
           # 3. Prepare the directory
           DB_DIR=/var/workdir/source/clamav-db
           mkdir -p "$DB_DIR"
+
+          # FIX: Make the directory writable so freshclam (UID 999) can save files there
+          chmod 777 "$DB_DIR"
           
           # 4. Configure freshclam (Critical Fix: Added DatabaseMirror)
           echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
