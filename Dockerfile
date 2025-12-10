@@ -13,13 +13,13 @@ ENV POLICY_PATH="/project"
 COPY RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 
 # 2. Install packages (Network disabled)
+# ...
 RUN microdnf -y --setopt=tsflags=nodocs install \
     clamav \
     clamd \
     clamav-server \
     clamav-update \
     jq \
-    tar \
     skopeo \
     findutils \
     && microdnf clean all
