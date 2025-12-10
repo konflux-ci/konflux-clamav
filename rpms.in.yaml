@@ -1,0 +1,3 @@
+packages: [clamav, clamd, clamav-server, clamav-update, jq, tar, skopeo, findutils] 
+contentOrigin:
+  repofiles: ["./ubi.repo", "./epel.repo"]
