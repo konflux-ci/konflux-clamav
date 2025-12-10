@@ -192,8 +192,8 @@ spec:
           # 1. Install EPEL repo
           rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
           
-          # 2. Install Tools (Added 'curl' so we can download files)
-          microdnf install -y clamav clamav-update curl
+          # 2. Install ClamAV ONLY (curl is already there!)
+          microdnf install -y clamav clamav-update
           
           # 3. Setup DB Directory
           DB_DIR=/var/workdir/source/clamav-db
@@ -205,12 +205,10 @@ spec:
           echo "DatabaseMirror database.clamav.net" >> /tmp/freshclam.conf
           freshclam --config-file=/tmp/freshclam.conf
           
-          # 5. Download GPG Key (New!)
-          # We save it to the source root so Dockerfile "COPY RPM-GPG-KEY..." works
+          # 5. Download GPG Key (Works because curl-minimal is installed)
           curl -L -o /var/workdir/source/RPM-GPG-KEY-EPEL-9 https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
           
-          # 6. Download OpenShift Client (New!)
-          # We save it to the source root so Dockerfile "COPY openshift-client..." works
+          # 6. Download OpenShift Client
           curl -L -o /var/workdir/source/openshift-client-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
       runAfter:
       - clone-repository
