@@ -188,26 +188,30 @@ spec:
           set -o errexit
           set -o nounset
           set -o pipefail
-
+          
           # 1. Install EPEL repo
           rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
           
-          # 2. Install ClamAV
-          microdnf install -y clamav clamav-update
+          # 2. Install Tools (Added 'curl' so we can download files)
+          microdnf install -y clamav clamav-update curl
           
-          # 3. Prepare the directory
+          # 3. Setup DB Directory
           DB_DIR=/var/workdir/source/clamav-db
           mkdir -p "$DB_DIR"
-
-          # FIX: Make the directory writable so freshclam (UID 999) can save files there
           chmod 777 "$DB_DIR"
           
-          # 4. Configure freshclam (Critical Fix: Added DatabaseMirror)
+          # 4. Run Freshclam (Virus DB)
           echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
           echo "DatabaseMirror database.clamav.net" >> /tmp/freshclam.conf
-          
-          # 5. Run freshclam
           freshclam --config-file=/tmp/freshclam.conf
+          
+          # 5. Download GPG Key (New!)
+          # We save it to the source root so Dockerfile "COPY RPM-GPG-KEY..." works
+          curl -L -o /var/workdir/source/RPM-GPG-KEY-EPEL-9 https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+          
+          # 6. Download OpenShift Client (New!)
+          # We save it to the source root so Dockerfile "COPY openshift-client..." works
+          curl -L -o /var/workdir/source/openshift-client-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
       runAfter:
       - clone-repository
       taskRef:

@@ -1,10 +1,4 @@
 ---
-metadata: 
+metadata:
   version: "1.0"
-artifacts:
-  - download_url: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
-    checksum: "sha256:fcf0eab4f05a1c0de6363ac4b707600a27a9d774e9b491059e59e6921b255a84"
-    filename: "RPM-GPG-KEY-EPEL-9"
-  - download_url: https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
-    checksum: "sha256:b466b21666ba41153e0a518936080f067c16aa334e5765cde8b89ca42150c78a"
-    filename: "openshift-client-linux.tar.gz"
+artifacts: []
