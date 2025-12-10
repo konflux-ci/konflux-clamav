@@ -176,24 +176,26 @@ spec:
         value: $(params.output-image).prefetch
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
+      # FIX: Use UBI (root user) instead of ClamAV image to avoid permission errors
       - name: runtimeImage
-        value: "quay.io/clamav/clamav:latest"
+        value: "registry.access.redhat.com/ubi9/ubi-minimal:latest"
+      # FIX: Install ClamAV as root, creating the directory successfully
       - name: executionScript
         value: |
           #!/usr/bin/env bash
           set -o errexit
           set -o nounset
           set -o pipefail
-          set -x
-
-          # Create the directory for the DB (must match Dockerfile COPY)
+          
+          # 1. Install ClamAV
+          microdnf install -y clamav clamav-update
+          
+          # 2. Prepare the directory (we are root, so this works now)
           DB_DIR=/var/workdir/source/clamav-db
           mkdir -p "$DB_DIR"
-
-          # Configure freshclam to point to that directory
-          echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
           
-          # Run the update
+          # 3. Configure and run freshclam
+          echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
           freshclam --config-file=/tmp/freshclam.conf
       runAfter:
       - clone-repository
