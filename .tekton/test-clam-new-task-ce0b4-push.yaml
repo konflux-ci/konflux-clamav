@@ -184,18 +184,21 @@ spec:
           set -o nounset
           set -o pipefail
 
-          # Install EPEL repo (REQUIRED to find clamav packages)
+          # 1. Install EPEL repo
           rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
           
-          # 1. Install ClamAV (since we are root, this works)
+          # 2. Install ClamAV
           microdnf install -y clamav clamav-update
           
-          # 2. Prepare the directory
+          # 3. Prepare the directory
           DB_DIR=/var/workdir/source/clamav-db
           mkdir -p "$DB_DIR"
           
-          # 3. Configure and run freshclam
+          # 4. Configure freshclam (Critical Fix: Added DatabaseMirror)
           echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
+          echo "DatabaseMirror database.clamav.net" >> /tmp/freshclam.conf
+          
+          # 5. Run freshclam
           freshclam --config-file=/tmp/freshclam.conf
       runAfter:
       - clone-repository
