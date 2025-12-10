@@ -21,7 +21,6 @@ RUN microdnf -y --setopt=tsflags=nodocs install \
     clamav-update \
     jq \
     skopeo \
-    findutils \
     && microdnf clean all
 
 # -------------------------------------------------------------------------
