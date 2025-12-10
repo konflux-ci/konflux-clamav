@@ -183,6 +183,9 @@ spec:
           set -o errexit
           set -o nounset
           set -o pipefail
+
+          # Install EPEL repo (REQUIRED to find clamav packages)
+          rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
           
           # 1. Install ClamAV (since we are root, this works)
           microdnf install -y clamav clamav-update

@@ -176,16 +176,17 @@ spec:
         value: $(params.output-image).prefetch
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
-      # FIX: Use UBI (root user) instead of ClamAV image to avoid permission errors
       - name: runtimeImage
         value: "registry.access.redhat.com/ubi9/ubi-minimal:latest"
-      # FIX: Install ClamAV as root, creating the directory successfully
       - name: executionScript
         value: |
           #!/usr/bin/env bash
           set -o errexit
           set -o nounset
           set -o pipefail
+
+          # Install EPEL repo (REQUIRED to find clamav packages)
+          rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
           
           # 1. Install ClamAV
           microdnf install -y clamav clamav-update
