@@ -4,28 +4,31 @@ FROM registry.access.redhat.com/ubi9/ubi-minimal:9.7-1764794109
 ENV POLICY_PATH="/project"
 
 # -------------------------------------------------------------------------
-# HERMETIC INSTALLATION START (Replaces network install)
+# HERMETIC INSTALLATION (RPMs)
 # -------------------------------------------------------------------------
-# 1. Copy the RPMs directory (created by prefetch-dependencies task)
-COPY rpm /tmp/rpm
+# The pipeline (via Cachi2) automatically mounts the downloaded RPMs 
+# and configures /etc/yum.repos.d/ so microdnf can find them offline.
 
-# 2. Copy the GPG Key (defined in artifacts.lock.yaml)
-COPY artifacts/RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
+# 1. Import the GPG Key (Downloaded by prefetch to source root)
+COPY RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 
-# 3. Install packages offline
-# --disablerepo=* ensures we DO NOT try to reach the internet
-# /tmp/rpm/*.rpm tells microdnf to use ONLY the files we just copied in
-RUN microdnf install -y --disablerepo=* /tmp/rpm/*.rpm && \
-    microdnf clean all && \
-    rm -rf /tmp/rpm
+# 2. Install packages (Network disabled)
+RUN microdnf -y --setopt=tsflags=nodocs install \
+    clamav \
+    clamd \
+    clamav-server \
+    clamav-update \
+    jq \
+    tar \
+    skopeo \
+    findutils \
+    && microdnf clean all
+
 # -------------------------------------------------------------------------
-# HERMETIC INSTALLATION END
+# CLAMAV CONFIGURATION
 # -------------------------------------------------------------------------
-
-# Add clamav user and group
 RUN groupadd -r clamav && useradd -r -g clamav clamav
 
-# Create necessary directories
 RUN mkdir -p /var/run/clamd.scan /var/log/clamav && \
     chmod -R 0777 /var/run/clamd.scan /var/log/clamav
 
@@ -64,13 +67,8 @@ RUN sed -i 's|^#LogFile .*|LogFile /var/log/clamav/clamd.log|' /etc/clamd.d/scan
     sed -i 's|^#BytecodeSecurity .*|BytecodeSecurity TrustSigned|' /etc/clamd.d/scan.conf
 
 COPY /start-clamd.sh /start-clamd.sh
-
-# Copies your code file from your action repository to the filesystem path `/` of the container
 COPY test/selftest.sh /selftest.sh
-
-# Use utils.sh by copying it from the image
 COPY --from=konflux-test /utils.sh /utils.sh
-
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 
 # -------------------------------------------------------------------------
@@ -78,20 +76,19 @@ COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 # -------------------------------------------------------------------------
 # Copy the DB files we downloaded in the pipeline
 COPY clamav-db /var/lib/clamav/
-
-# Ensure the clamav user owns them
 RUN chown -R clamav:clamav /var/lib/clamav
 
 COPY /whitelist.ign2 /var/lib/clamav/whitelist.ign2
-
 COPY --from=konflux-test project $POLICY_PATH
 
-# Download and install oc (Note: If this fails, you might need to prefetch 'oc' too!)
-# For now, if the build is hermetic, this curl command will likely fail next.
-RUN ARCH="$(uname -m)" && \
-    curl -fsSL https://mirror.openshift.com/pub/openshift-v4/"$ARCH"/clients/ocp/stable/openshift-client-linux.tar.gz --output oc.tar.gz && \
-    cp oc.tar.gz /usr/bin/oc && \
-    tar -xzvf oc.tar.gz -C /usr/bin && \
-    rm oc.tar.gz
+# -------------------------------------------------------------------------
+# OPENSHIFT CLIENT INSTALLATION (Hermetic)
+# -------------------------------------------------------------------------
+# Copy the OC binary downloaded by prefetch-dependencies (From Source Root)
+COPY openshift-client-linux.tar.gz /tmp/oc.tar.gz
+
+RUN tar -xzvf /tmp/oc.tar.gz -C /usr/bin oc && \
+    rm /tmp/oc.tar.gz && \
+    chmod +x /usr/bin/oc
 
 ENTRYPOINT ["/start-clamd.sh"]
