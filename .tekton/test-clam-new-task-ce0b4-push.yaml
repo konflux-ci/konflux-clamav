@@ -165,18 +165,57 @@ spec:
       workspaces:
       - name: basic-auth
         workspace: git-auth
-    - name: prefetch-dependencies
+    - name: fetch-db-data
       params:
-      - name: input
-        value: $(params.prefetch-input)
       - name: SOURCE_ARTIFACT
         value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: ociStorage
         value: $(params.output-image).prefetch
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
+      - name: runtimeImage
+        value: "quay.io/clamav/clamav:latest"
+      - name: executionScript
+        value: |
+          #!/usr/bin/env bash
+          set -o errexit
+          set -o nounset
+          set -o pipefail
+          set -x
+
+          # Create the directory for the DB (must match Dockerfile COPY)
+          DB_DIR=/var/workdir/source/clamav-db
+          mkdir -p "$DB_DIR"
+
+          # Configure freshclam to point to that directory
+          echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
+          
+          # Run the update
+          freshclam --config-file=/tmp/freshclam.conf
       runAfter:
       - clone-repository
+      taskRef:
+        params:
+        - name: url
+          value: https://github.com/konflux-ci/tekton-integration-catalog.git
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: tasks/fetch-data-to-trusted-artifact/0.1/fetch-data-to-trusted-artifact.yaml
+        resolver: git
+
+    - name: prefetch-dependencies
+      params:
+      - name: input
+        value: $(params.prefetch-input)
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.fetch-db-data.results.SOURCE_ARTIFACT)
+      - name: ociStorage
+        value: $(params.output-image).prefetch
+      - name: ociArtifactExpiresAfter
+        value: $(params.image-expires-after)
+      runAfter:
+      - fetch-db-data
       taskRef:
         params:
         - name: name
