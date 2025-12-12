@@ -1,0 +1,45 @@
+packages:
+  - acl
+  - clamav
+  - clamav-server
+  - clamav-update
+  - clamd
+  - containers-common
+  - cracklib
+  - cracklib-dicts
+  - dbus
+  - dbus-broker
+  - dbus-common
+  - expat
+  - findutils
+  - fuse3
+  - fuse3-libs
+  - fuse-common
+  - fuse-overlayfs
+  - gzip
+  - jq
+  - kmod
+  - kmod-libs
+  - libdb
+  - libeconf
+  - libfdisk
+  - libnl3
+  - libpwquality
+  - libseccomp
+  - libutempter
+  - openssl
+  - pam
+  - protobuf-c
+  - shadow-utils-subid
+  - skopeo
+  - systemd
+  - systemd-pam
+  - systemd-rpm-macros
+  - tar
+  - util-linux
+  - util-linux-core
+  - yajl
+contentOrigin:
+  repofiles:
+    - ./ubi.repo
+    - ./epel.repo
