@@ -180,33 +180,7 @@ spec:
       - name: runtimeImage
         value: "registry.access.redhat.com/ubi9/ubi-minimal:latest"
       - name: executionScript
-        value: |
-          #!/usr/bin/env bash
-          set -o errexit
-          set -o nounset
-          set -o pipefail
-          
-          # 1. Install EPEL repo
-          rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-          
-          # 2. Install ClamAV ONLY (curl is already there!)
-          microdnf install -y clamav clamav-update
-          
-          # 3. Setup DB Directory
-          DB_DIR=/var/workdir/source/clamav-db
-          mkdir -p "$DB_DIR"
-          chmod 777 "$DB_DIR"
-          
-          # 4. Run Freshclam (Virus DB)
-          echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
-          echo "DatabaseMirror database.clamav.net" >> /tmp/freshclam.conf
-          freshclam --config-file=/tmp/freshclam.conf
-          
-          # 5. Download GPG Key (Works because curl-minimal is installed)
-          curl -L -o /var/workdir/source/RPM-GPG-KEY-EPEL-9 https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
-          
-          # 6. Download OpenShift Client
-          curl -L -o /var/workdir/source/openshift-client-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
+        value: "/var/workdir/source/fetch-db-and-tools.sh"
       runAfter:
       - clone-repository
       taskRef:
