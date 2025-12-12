@@ -13,7 +13,7 @@ microdnf install -y clamav clamav-update
 # In the pipeline, the source is mounted at /var/workdir/source
 DB_DIR=/var/workdir/source/clamav-db
 mkdir -p "$DB_DIR"
-chmod 755 "$DB_DIR"
+chmod 777 "$DB_DIR"
 
 # Run Freshclam 
 echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
