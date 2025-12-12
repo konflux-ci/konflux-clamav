@@ -35,9 +35,6 @@ spec:
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
-
-      _Uses `buildah` to create a multi-platform container image leveraging [trusted artifacts](https://konflux-ci.dev/architecture/ADR/0036-trusted-artifacts.html). It also optionally creates a source image and runs some build-time tests. This pipeline requires that the [multi platform controller](https://github.com/konflux-ci/multi-platform-controller) is deployed and configured on your Konflux instance. Information is shared between tasks using OCI artifacts instead of PVCs. EC will pass the [`trusted_task.trusted`](https://conforma.dev/docs/policy/packages/release_trusted_task.html#trusted_task__trusted) policy as long as all data used to build the artifact is generated from trusted tasks.
-      This pipeline is pushed as a Tekton bundle to [quay.io](https://quay.io/repository/konflux-ci/tekton-catalog/pipeline-docker-build-multi-platform-oci-ta?tab=tags)_
     params:
     - description: Source Repository URL
       name: git-url
@@ -65,11 +62,11 @@ spec:
       description: Skip checks against built image
       name: skip-checks
       type: string
-    - default: "false"
+    - default: "true"
       description: Execute the build with network isolation
       name: hermetic
       type: string
-    - default: ""
+    - default: '[{"type": "rpm", "path": "."}, {"type": "generic", "path": "."}]'
       description: Build dependencies to be prefetched
       name: prefetch-input
       type: string
@@ -172,18 +169,41 @@ spec:
       workspaces:
       - name: basic-auth
         workspace: git-auth
-    - name: prefetch-dependencies
+    - name: fetch-db-data
       params:
-      - name: input
-        value: $(params.prefetch-input)
       - name: SOURCE_ARTIFACT
         value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: ociStorage
         value: $(params.output-image).prefetch
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
+      - name: runtimeImage
+        value: "registry.access.redhat.com/ubi9/ubi-minimal:latest"
+      - name: executionScript
+        value: "/var/workdir/source/fetch-db-and-tools.sh"
       runAfter:
       - clone-repository
+      taskRef:
+        params:
+        - name: url
+          value: https://github.com/konflux-ci/tekton-integration-catalog.git
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: tasks/fetch-data-to-trusted-artifact/0.1/fetch-data-to-trusted-artifact.yaml
+        resolver: git
+    - name: prefetch-dependencies
+      params:
+      - name: input
+        value: $(params.prefetch-input)
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.fetch-db-data.results.SOURCE_ARTIFACT)
+      - name: ociStorage
+        value: $(params.output-image).prefetch
+      - name: ociArtifactExpiresAfter
+        value: $(params.image-expires-after)
+      runAfter:
+      - fetch-db-data
       taskRef:
         params:
         - name: name
