@@ -5,13 +5,14 @@ ENV POLICY_PATH="/project"
 
 COPY RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 
-RUN microdnf -y --setopt=tsflags=nodocs install \
+RUN microdnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install \
     clamav \
     clamd \
     clamav-server \
     clamav-update \
     jq \
     skopeo \
+    tar \
     && microdnf clean all
 
 RUN groupadd -r clamav && useradd -r -g clamav clamav
