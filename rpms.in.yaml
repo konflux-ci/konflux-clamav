@@ -43,3 +43,6 @@ contentOrigin:
   repofiles:
     - ./ubi.repo
     - ./epel.repo
+arches:
+  - x86_64
+  - aarch64
