@@ -1,4 +1,4 @@
-FROM quay.io/konflux-ci/konflux-test:v1.4.42@sha256:32112ba0f1b8a3944f4905be40308713c32beb6c059c42ef0bc2b5fe7947ff2f as konflux-test
+FROM quay.io/konflux-ci/konflux-test:v1.4.43@sha256:0bcc59de96bdc6f989d5c06d142d674da5d495c450a760fdd7d6fd333433342e as konflux-test
 FROM registry.access.redhat.com/ubi9/ubi-minimal:9.7-1764794109
 
 ENV POLICY_PATH="/project"
