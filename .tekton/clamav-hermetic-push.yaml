@@ -176,13 +176,13 @@ spec:
       - clone-repository
       taskRef:
         params:
-        - name: url
-          value: https://github.com/konflux-ci/tekton-integration-catalog.git
-        - name: revision
-          value: main
-        - name: pathInRepo
-          value: tasks/fetch-data-to-trusted-artifact/0.1/fetch-data-to-trusted-artifact.yaml
-        resolver: git
+        - name: name
+          value: fetch-data-to-trusted-artifact
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-fetch-data-to-trusted-artifact:0.1@sha256:f3105251932ed461b640f3ff1b417a997a04b03dae99ed68906cc7f4d7c75cfa
+        - name: kind
+          value: task
+        resolver: bundles
 
     - name: prefetch-dependencies
       params:
