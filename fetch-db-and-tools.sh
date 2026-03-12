@@ -23,5 +23,20 @@ freshclam --config-file=/tmp/freshclam.conf
 # Download GPG Key
 curl -L -o /var/workdir/source/RPM-GPG-KEY-EPEL-9 https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
 
-# Download OpenShift Client
-curl -L -o /var/workdir/source/openshift-client-linux.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
+# Download OpenShift Client (architecture-aware)
+# Maps uname -m output to OpenShift mirror paths
+ARCH=$(uname -m)
+case "$ARCH" in
+    aarch64) OC_ARCH="aarch64" ;;
+    arm64)   OC_ARCH="arm64" ;;
+    x86_64)  OC_ARCH="x86_64" ;;
+    amd64)   OC_ARCH="amd64" ;;
+    ppc64le) OC_ARCH="ppc64le" ;;
+    s390x)   OC_ARCH="s390x" ;;
+    *)
+        echo "ERROR: Unsupported architecture: $ARCH" >&2
+        exit 1
+        ;;
+esac
+curl -L -o /var/workdir/source/openshift-client-linux.tar.gz \
+    "https://mirror.openshift.com/pub/openshift-v4/${OC_ARCH}/clients/ocp/stable/openshift-client-linux.tar.gz"
