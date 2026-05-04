@@ -158,18 +158,24 @@ spec:
       workspaces:
       - name: basic-auth
         workspace: git-auth
-    - name: fetch-db-data
+    # Tekton-Kueue rejects matrixed->matrix result wiring; matrix-only params like
+    # PREFETCH_OCI_SUFFIX are not pipeline params. Use one fetch+prefetch pair per arch.
+    - name: fetch-db-amd64
       params:
       - name: SOURCE_ARTIFACT
         value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: ociStorage
-        value: $(params.output-image).prefetch
+        value: $(params.output-image).fetch-amd64
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
       - name: SCRIPT_RUNNER_IMAGE
         value: "registry.access.redhat.com/ubi9/ubi-minimal:latest"
       - name: SCRIPT
-        value: "/var/workdir/source/fetch-db-and-tools.sh"
+        value: |
+          #!/bin/sh
+          set -eu
+          export TARGET_PLATFORM="linux/x86_64"
+          exec /var/workdir/source/fetch-db-and-tools.sh
       - name: HERMETIC
         value: "false"
       runAfter:
@@ -183,20 +189,77 @@ spec:
         - name: kind
           value: task
         resolver: bundles
-    - name: prefetch-dependencies
+    - name: fetch-db-arm64
+      params:
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
+      - name: ociStorage
+        value: $(params.output-image).fetch-arm64
+      - name: ociArtifactExpiresAfter
+        value: $(params.image-expires-after)
+      - name: SCRIPT_RUNNER_IMAGE
+        value: "registry.access.redhat.com/ubi9/ubi-minimal:latest"
+      - name: SCRIPT
+        value: |
+          #!/bin/sh
+          set -eu
+          export TARGET_PLATFORM="linux/arm64"
+          exec /var/workdir/source/fetch-db-and-tools.sh
+      - name: HERMETIC
+        value: "false"
+      runAfter:
+      - clone-repository
+      taskRef:
+        params:
+        - name: name
+          value: run-script-oci-ta
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-run-script-oci-ta:0.1@sha256:0e13a74cc02c945e7119ecd4cc0c9148e7591b50f87e415b212154caad0479c0
+        - name: kind
+          value: task
+        resolver: bundles
+    - name: prefetch-amd64
       params:
       - name: input
         value: $(params.prefetch-input)
       - name: SOURCE_ARTIFACT
-        value: $(tasks.fetch-db-data.results.SCRIPT_ARTIFACT)
+        value: $(tasks.fetch-db-amd64.results.SCRIPT_ARTIFACT)
       - name: ociStorage
-        value: $(params.output-image).prefetch
+        value: $(params.output-image).prefetch-amd64
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
       - name: enable-package-registry-proxy
         value: $(params.enable-package-registry-proxy)
       runAfter:
-      - fetch-db-data
+      - fetch-db-amd64
+      taskRef:
+        params:
+        - name: name
+          value: prefetch-dependencies-oci-ta
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-prefetch-dependencies-oci-ta:0.3@sha256:1b209c0d93e52e418f3e6cd4b4fd915a84e4bd7f68e1cfd0d6446133540d7f43
+        - name: kind
+          value: task
+        resolver: bundles
+      workspaces:
+      - name: git-basic-auth
+        workspace: git-auth
+      - name: netrc
+        workspace: netrc
+    - name: prefetch-arm64
+      params:
+      - name: input
+        value: $(params.prefetch-input)
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.fetch-db-arm64.results.SCRIPT_ARTIFACT)
+      - name: ociStorage
+        value: $(params.output-image).prefetch-arm64
+      - name: ociArtifactExpiresAfter
+        value: $(params.image-expires-after)
+      - name: enable-package-registry-proxy
+        value: $(params.enable-package-registry-proxy)
+      runAfter:
+      - fetch-db-arm64
       taskRef:
         params:
         - name: name
@@ -212,12 +275,28 @@ spec:
       - name: netrc
         workspace: netrc
     - matrix:
-        params:
-        - name: PLATFORM
-          value:
-          - $(params.build-platforms)
+        include:
+        - name: build-linux-x86-64
+          params:
+          - name: PLATFORM
+            value: linux/x86_64
+          - name: SOURCE_ARTIFACT
+            value: $(tasks.prefetch-amd64.results.SOURCE_ARTIFACT)
+          - name: CACHI2_ARTIFACT
+            value: $(tasks.prefetch-amd64.results.CACHI2_ARTIFACT)
+        - name: build-linux-arm64
+          params:
+          - name: PLATFORM
+            value: linux/arm64
+          - name: SOURCE_ARTIFACT
+            value: $(tasks.prefetch-arm64.results.SOURCE_ARTIFACT)
+          - name: CACHI2_ARTIFACT
+            value: $(tasks.prefetch-arm64.results.CACHI2_ARTIFACT)
       name: build-images
       params:
+      - name: ADDITIONAL_BASE_IMAGES
+        value:
+        - $(tasks.fetch-db-amd64.results.SCRIPT_RUNNER_IMAGE_REFERENCE)
       - name: IMAGE
         value: $(params.output-image)
       - name: DOCKERFILE
@@ -239,10 +318,6 @@ spec:
         value: $(params.build-args-file)
       - name: PRIVILEGED_NESTED
         value: $(params.privileged-nested)
-      - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
-      - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
       - name: IMAGE_APPEND_PLATFORM
         value: "true"
       - name: BUILDAH_FORMAT
@@ -251,11 +326,9 @@ spec:
         value: $(tasks.init.results.http-proxy)
       - name: NO_PROXY
         value: $(tasks.init.results.no-proxy)
-      - name: ADDITIONAL_BASE_IMAGES
-        value:
-          - $(tasks.fetch-db-data.results.SCRIPT_RUNNER_IMAGE_REFERENCE)
       runAfter:
-      - prefetch-dependencies
+      - prefetch-amd64
+      - prefetch-arm64
       taskRef:
         params:
         - name: name
@@ -294,9 +367,9 @@ spec:
       - name: BINARY_IMAGE_DIGEST
         value: $(tasks.build-image-index.results.IMAGE_DIGEST)
       - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+        value: ""
       runAfter:
       - build-image-index
       taskRef:
@@ -394,9 +467,9 @@ spec:
       - name: image-url
         value: $(tasks.build-image-index.results.IMAGE_URL)
       - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+        value: ""
       runAfter:
       - build-image-index
       taskRef:
@@ -466,9 +539,9 @@ spec:
       - name: BUILD_ARGS_FILE
         value: $(params.build-args-file)
       - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+        value: ""
       runAfter:
       - coverity-availability-check
       taskRef:
@@ -513,9 +586,9 @@ spec:
       - name: image-url
         value: $(tasks.build-image-index.results.IMAGE_URL)
       - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+        value: ""
       runAfter:
       - build-image-index
       taskRef:
@@ -539,9 +612,9 @@ spec:
       - name: image-url
         value: $(tasks.build-image-index.results.IMAGE_URL)
       - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+        value: ""
       runAfter:
       - build-image-index
       taskRef:
@@ -586,7 +659,7 @@ spec:
       - name: CONTEXT
         value: $(params.path-context)
       - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
       runAfter:
       - build-image-index
       taskRef:
