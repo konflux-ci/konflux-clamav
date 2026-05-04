@@ -65,8 +65,10 @@ RUN chown -R clamav:clamav /var/lib/clamav
 COPY /whitelist.ign2 /var/lib/clamav/whitelist.ign2
 COPY --from=konflux-test project $POLICY_PATH
 
-COPY openshift-client-linux.tar.gz /tmp/oc.tar.gz
-
+# TARGETARCH is set automatically by Buildah to the target platform arch
+# (amd64, arm64, ppc64le, s390x) matching the filenames fetched by fetch-db-and-tools.sh.
+ARG TARGETARCH=amd64
+COPY openshift-client-linux-${TARGETARCH}.tar.gz /tmp/oc.tar.gz
 RUN tar -xzvf /tmp/oc.tar.gz -C /usr/bin oc && \
     rm /tmp/oc.tar.gz && \
     chmod +x /usr/bin/oc
