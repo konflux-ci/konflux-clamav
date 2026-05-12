@@ -1,4 +1,4 @@
-exclude_attributes:
+excluded_attributes:
   - type_annotations
   - standard_layout
   - lock_files
