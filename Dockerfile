@@ -1,11 +1,12 @@
 FROM quay.io/konflux-ci/konflux-test:v1.5.0@sha256:fbd5ad045b902065990218922aa6f343e8eb5fd039ecd445bc54819b8e968c3e as konflux-test
-FROM registry.access.redhat.com/ubi9/ubi-minimal:9.7-1778562320
+FROM registry.access.redhat.com/ubi9/ubi:9.8-1779374378
 
 ENV POLICY_PATH="/project"
 
 COPY RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 
-RUN microdnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install \
+RUN dnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install \
     clamav \
     clamd \
     clamav-server \
@@ -13,7 +14,7 @@ RUN microdnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install \
     jq \
     skopeo \
     tar \
-    && microdnf clean all
+    && dnf clean all
 
 RUN groupadd -r clamav && useradd -r -g clamav clamav
 
