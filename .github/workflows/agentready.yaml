@@ -1,6 +1,6 @@
-on:
+"on":
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   agentready:
@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      
+
       - uses: actions/setup-python@v6
         with:
           python-version: '3.14'
@@ -19,7 +19,7 @@ jobs:
           packages: |
             agentready==2.31.2
       - run: pip install agentready
-            
+
       - name: Run agentready check
         run: |
             agentready --version
