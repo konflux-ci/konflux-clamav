@@ -1,5 +1,6 @@
 ignore: |
   /vendor
+  .tekton
 
 rules:
   braces: enable
