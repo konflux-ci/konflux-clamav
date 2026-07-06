@@ -60,11 +60,12 @@ A pull request to `main` runs GitHub Actions and a Konflux hermetic build for co
 
 ### GitHub Actions
 
-| Workflow | Path | Purpose |
-|----------|------|---------|
-| Agentready | `.github/workflows/agentready.yaml` | Repo readiness per `.agentready/config/.agentready-config.yaml` |
+| Workflow | Path | Jobs | Purpose |
+|----------|------|------|---------|
+| Agentready | `.github/workflows/agentready.yaml` | agentready | Repo readiness per `.agentready/config/.agentready-config.yaml` |
+| Validate PRs | `.github/workflows/pr-checks.yaml` | yaml-linter, dockerfile-linter, shellcheck, gitlint | Lint YAML (yamllint), Dockerfile (hadolint), shell scripts (shellcheck), and commit messages (gitlint) |
 
-There is no `make test`, unit test workflow, or Dockerfile hadolint job in this repository.
+There is no `make test` or unit test suite in this repository. Linting is enforced via `pr-checks.yaml`.
 
 ### Konflux Tekton
 
