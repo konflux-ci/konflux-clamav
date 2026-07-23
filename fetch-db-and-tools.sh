@@ -15,6 +15,14 @@ DB_DIR=/var/workdir/source/clamav-db
 mkdir -p "$DB_DIR"
 chmod 777 "$DB_DIR"
 
+# Add clamupdate user (idempotent)
+if ! getent group clamupdate >/dev/null; then
+  groupadd -r clamupdate
+fi
+if ! id -u clamupdate >/dev/null 2>&1; then
+  useradd -r -g clamupdate -M -s /sbin/nologin -c "Clam Antivirus Update" clamupdate
+fi
+
 # Run Freshclam 
 echo "DatabaseDirectory $DB_DIR" > /tmp/freshclam.conf
 echo "DatabaseMirror database.clamav.net" >> /tmp/freshclam.conf
