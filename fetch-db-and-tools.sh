@@ -15,7 +15,7 @@ DB_DIR=/var/workdir/source/clamav-db
 mkdir -p "$DB_DIR"
 chmod 777 "$DB_DIR"
 
-# Add clamupdate user (idempotent)
+# Add clamupdate user (idempotent) - this user is needed for the Freshclam utility
 if ! getent group clamupdate >/dev/null; then
   groupadd -r clamupdate
 fi
