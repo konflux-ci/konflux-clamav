@@ -183,7 +183,7 @@ spec:
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
       - name: SCRIPT_RUNNER_IMAGE
-        value: "registry.access.redhat.com/ubi9/ubi-minimal:latest"
+        value: "registry.access.redhat.com/ubi9/ubi-minimal:9.7-1778562320@sha256:12db9874bd753eb98b1ab3d840e75de5d6842ac0604fbd68c012adefe97140be"
       - name: SCRIPT
         value: "/var/workdir/source/fetch-db-and-tools.sh"
       - name: HERMETIC
