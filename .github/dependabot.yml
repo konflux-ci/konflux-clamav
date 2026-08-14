@@ -15,12 +15,13 @@ updates:
     # Add reviewers
     reviewers:
       - "dirgim"
-      - "hongweiliu17"
       - "jsztuka"
       - "Josh-Everett"
       - "kasemAlem"
       - "sonam1412"
       - "14rcole"
+      - "jencull"
+      - "NigelByrne1"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -29,23 +30,10 @@ updates:
       prefix: "chore(actions): "
     reviewers:
       - "dirgim"
-      - "hongweiliu17"
       - "jsztuka"
       - "Josh-Everett"
       - "kasemAlem"
       - "sonam1412"
       - "14rcole"
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: weekly
-    commit-message:
-      prefix: "chore(Dockerfile): "
-    reviewers:
-      - "dirgim"
-      - "hongweiliu17"
-      - "jsztuka"
-      - "Josh-Everett"
-      - "kasemAlem"
-      - "sonam1412"
-      - "14rcole"
+      - "jencull"
+      - "NigelByrne1"
