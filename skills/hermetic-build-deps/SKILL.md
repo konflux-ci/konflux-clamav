@@ -53,7 +53,7 @@ prefetch-dependencies (Hermeto)
 
 build-images (hermetic Dockerfile)
   COPY clamav-db, GPG key, oc tarball for TARGETARCH
-  microdnf install clamav, clamd, jq, skopeo, tar, …  (from prefetched RPM set)
+  dnf install clamav, clamd, jq, skopeo, tar, …  (from prefetched RPM set)
   COPY --from=konflux-test utils.sh, ec, policy tree
 ```
 
@@ -66,7 +66,7 @@ build-images (hermetic Dockerfile)
 | `openshift-client-linux-${TARGETARCH}.tar.gz` | `fetch-db-and-tools.sh` |
 | `whitelist.ign2` | Git |
 | `start-clamd.sh`, `test/selftest.sh` | Git |
-| ClamAV RPMs in `RUN microdnf install` | Must match `rpms.in.yaml` |
+| ClamAV RPMs in `RUN dnf install` | Must match `rpms.in.yaml` |
 
 If you add a package to `rpms.in.yaml`, refresh `rpms.lock.yaml` and add it to the Dockerfile install list when it is part of the runtime image.
 
@@ -119,7 +119,7 @@ Docs: [Konflux — prefetching RPM dependencies](https://konflux.pages.redhat.co
 
 1. Add the package name to `packages:` in `rpms.in.yaml` (not every transitive dep)
 2. Regenerate `rpms.lock.yaml` with `rpm-lockfile-prototype` (see above) or merge a MintMaker lockfile PR
-3. Add the package to the Dockerfile `microdnf install` line if it belongs in the final image
+3. Add the package to the Dockerfile `dnf install` line if it belongs in the final image
 4. Open a PR and run the Konflux pipeline — local `docker build` alone does not run `fetch-db-data` or Hermeto prefetch
 
 ## Important notes

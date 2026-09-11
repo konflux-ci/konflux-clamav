@@ -36,7 +36,7 @@ A pull request to `main` runs GitHub Actions and a Konflux hermetic build for co
 ### Image and build inputs
 
 - [ ] Dockerfile changes stay minimal; touch the `clamd` `sed` block only when scan behavior requires it
-- [ ] RPM changes: `rpms.in.yaml`, `rpms.lock.yaml`, and Dockerfile `microdnf` list updated together
+- [ ] RPM changes: `rpms.in.yaml`, `rpms.lock.yaml`, and Dockerfile `dnf` install list updated together
 - [ ] Prefetch changes: `fetch-db-and-tools.sh` outputs still match Dockerfile `COPY` paths
 - [ ] Multi-arch: oc tarball names and `TARGETARCH` stay aligned
 
