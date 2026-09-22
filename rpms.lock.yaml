@@ -4,6 +4,13 @@ lockfileVendor: redhat
 arches:
 - arch: aarch64
   packages:
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/b/bsdtar-3.5.3-11.el9_8.aarch64.rpm
+    repoid: ubi-9-appstream-rpms
+    size: 68819
+    checksum: sha256:0d5e2201f50c15e8c3714dd5cf1e8d82fd2dca8539fba9c8ad3391e7d85841de
+    name: bsdtar
+    evr: 3.5.3-11.el9_8
+    sourcerpm: libarchive-3.5.3-11.el9_8.src.rpm
   - url: http://mirror.grid.uchicago.edu/pub/linux/epel/9/Everything/aarch64/Packages/c/clamav-1.4.6-1.el9.aarch64.rpm
     repoid: epel
     size: 3681046
@@ -176,6 +183,13 @@ arches:
   module_metadata: []
 - arch: x86_64
   packages:
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/b/bsdtar-3.5.3-11.el9_8.x86_64.rpm
+    repoid: ubi-9-appstream-rpms
+    size: 69785
+    checksum: sha256:75b12e67bb977de58de2207da9d8f69606d467ec5fdc63aea1987a50f6ae0a31
+    name: bsdtar
+    evr: 3.5.3-11.el9_8
+    sourcerpm: libarchive-3.5.3-11.el9_8.src.rpm
   - url: http://repo.ialab.dsu.edu/epel/9/Everything/x86_64/Packages/c/clamav-1.4.6-1.el9.x86_64.rpm
     repoid: epel
     size: 6823055

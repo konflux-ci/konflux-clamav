@@ -7,6 +7,7 @@ COPY RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 
 RUN dnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install \
+    bsdtar \
     clamav \
     clamd \
     clamav-server \
