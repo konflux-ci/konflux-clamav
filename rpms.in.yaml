@@ -1,5 +1,6 @@
 packages:
   - acl
+  - bsdtar
   - clamav
   - clamav-server
   - clamav-update
