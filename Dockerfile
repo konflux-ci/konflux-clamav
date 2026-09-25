@@ -1,5 +1,5 @@
 FROM quay.io/konflux-ci/konflux-test:v1.5.8@sha256:ce93e7ff1618deda40a66d90289d8fee1bf1ac151c06f1defd33d2a56dbd2b94 as konflux-test
-FROM registry.access.redhat.com/ubi9/ubi:9.8-1789552280
+FROM registry.access.redhat.com/ubi9/ubi:9.8-1790067847
 
 ENV POLICY_PATH="/project"
 
@@ -7,6 +7,7 @@ COPY RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
 
 RUN dnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install \
+    bsdtar \
     clamav \
     clamd \
     clamav-server \
@@ -36,6 +37,7 @@ RUN sed -i 's|^#LogFile .*|LogFile /var/log/clamav/clamd.log|' /etc/clamd.d/scan
     sed -i 's|^#AlertPhishingCloak .*|AlertPhishingCloak yes|' /etc/clamd.d/scan.conf && \
     sed -i 's|^#AlertPartitionIntersection .*|AlertPartitionIntersection yes|' /etc/clamd.d/scan.conf && \
     sed -i 's|^#ScanMail .*|ScanMail no|' /etc/clamd.d/scan.conf && \
+    sed -i 's|^#ScanArchive .*|ScanArchive no|' /etc/clamd.d/scan.conf && \
     sed -i 's|^#MaxScanTime .*|MaxScanTime 0|' /etc/clamd.d/scan.conf && \
     sed -i 's|^#MaxScanSize .*|MaxScanSize 4095M|' /etc/clamd.d/scan.conf && \
     sed -i 's|^#MaxFileSize .*|MaxFileSize 2000M|' /etc/clamd.d/scan.conf && \
