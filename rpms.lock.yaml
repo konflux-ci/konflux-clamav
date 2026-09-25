@@ -11,41 +11,6 @@ arches:
     name: bsdtar
     evr: 3.5.3-11.el9_8
     sourcerpm: libarchive-3.5.3-11.el9_8.src.rpm
-  - url: http://mirror.grid.uchicago.edu/pub/linux/epel/9/Everything/aarch64/Packages/c/clamav-1.4.6-1.el9.aarch64.rpm
-    repoid: epel
-    size: 3681046
-    checksum: sha256:3f5633d2f86f64d6418b3ab99b83828317796e3f80d5188b9e969fde2caa2dc0
-    name: clamav
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://mirror.grid.uchicago.edu/pub/linux/epel/9/Everything/aarch64/Packages/c/clamav-filesystem-1.4.6-1.el9.noarch.rpm
-    repoid: epel
-    size: 18617
-    checksum: sha256:8d4bc96248b7956f2370b167aacd80031231b86bddf428930f3256f9771739cb
-    name: clamav-filesystem
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://mirror.grid.uchicago.edu/pub/linux/epel/9/Everything/aarch64/Packages/c/clamav-freshclam-1.4.6-1.el9.aarch64.rpm
-    repoid: epel
-    size: 2933322
-    checksum: sha256:3ffed80337bd3a9ae949f1fc865f425f6003ef8a09e9637cd050a526e0eccc78
-    name: clamav-freshclam
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://mirror.grid.uchicago.edu/pub/linux/epel/9/Everything/aarch64/Packages/c/clamav-lib-1.4.6-1.el9.aarch64.rpm
-    repoid: epel
-    size: 3615795
-    checksum: sha256:7251ca11edbc2d4516c3b6ffd825c046a3067d672d2925f86526366f4cb1a640
-    name: clamav-lib
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://mirror.grid.uchicago.edu/pub/linux/epel/9/Everything/aarch64/Packages/c/clamd-1.4.6-1.el9.aarch64.rpm
-    repoid: epel
-    size: 95824
-    checksum: sha256:16afa3cad2dde2616d4ec9b1e37ed31afbbf495cd38dd1280ceae44abf16953e
-    name: clamd
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/containers-common-5.8-1.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
     size: 170106
@@ -116,13 +81,13 @@ arches:
     name: oniguruma
     evr: 6.9.6-1.el9.5
     sourcerpm: oniguruma-6.9.6-1.el9.5.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/s/skopeo-1.22.2-7.el9_8.aarch64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/s/skopeo-1.22.2-8.el9_8.aarch64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 7730213
-    checksum: sha256:074a883d072a5cbf34005d8d5b4a001358d346636ea9215cf45962081133d93e
+    size: 7728433
+    checksum: sha256:be0b5ff1c69b95d98431ed35560f96173778ac55f4d8f5d2630efc21cb4216be
     name: skopeo
-    evr: 2:1.22.2-7.el9_8
-    sourcerpm: skopeo-1.22.2-7.el9_8.src.rpm
+    evr: 2:1.22.2-8.el9_8
+    sourcerpm: skopeo-1.22.2-8.el9_8.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/s/slirp4netns-1.3.3-1.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
     size: 48428
@@ -179,6 +144,41 @@ arches:
     name: shadow-utils-subid
     evr: 2:4.9-16.el9
     sourcerpm: shadow-utils-4.9-16.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/c/clamav-1.4.6-1.el9.aarch64.rpm
+    repoid: epel
+    size: 3681046
+    checksum: sha256:3f5633d2f86f64d6418b3ab99b83828317796e3f80d5188b9e969fde2caa2dc0
+    name: clamav
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/c/clamav-filesystem-1.4.6-1.el9.noarch.rpm
+    repoid: epel
+    size: 18617
+    checksum: sha256:8d4bc96248b7956f2370b167aacd80031231b86bddf428930f3256f9771739cb
+    name: clamav-filesystem
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/c/clamav-freshclam-1.4.6-1.el9.aarch64.rpm
+    repoid: epel
+    size: 2933322
+    checksum: sha256:3ffed80337bd3a9ae949f1fc865f425f6003ef8a09e9637cd050a526e0eccc78
+    name: clamav-freshclam
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/c/clamav-lib-1.4.6-1.el9.aarch64.rpm
+    repoid: epel
+    size: 3615795
+    checksum: sha256:7251ca11edbc2d4516c3b6ffd825c046a3067d672d2925f86526366f4cb1a640
+    name: clamav-lib
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/c/clamd-1.4.6-1.el9.aarch64.rpm
+    repoid: epel
+    size: 95824
+    checksum: sha256:16afa3cad2dde2616d4ec9b1e37ed31afbbf495cd38dd1280ceae44abf16953e
+    name: clamd
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
   source: []
   module_metadata: []
 - arch: x86_64
@@ -190,41 +190,6 @@ arches:
     name: bsdtar
     evr: 3.5.3-11.el9_8
     sourcerpm: libarchive-3.5.3-11.el9_8.src.rpm
-  - url: http://repo.ialab.dsu.edu/epel/9/Everything/x86_64/Packages/c/clamav-1.4.6-1.el9.x86_64.rpm
-    repoid: epel
-    size: 6823055
-    checksum: sha256:d9ef528e5954a9b2a116118bccb9463866c0a4ab3c4d2681dc06908c276e1795
-    name: clamav
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://repo.ialab.dsu.edu/epel/9/Everything/x86_64/Packages/c/clamav-filesystem-1.4.6-1.el9.noarch.rpm
-    repoid: epel
-    size: 18617
-    checksum: sha256:8d4bc96248b7956f2370b167aacd80031231b86bddf428930f3256f9771739cb
-    name: clamav-filesystem
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://repo.ialab.dsu.edu/epel/9/Everything/x86_64/Packages/c/clamav-freshclam-1.4.6-1.el9.x86_64.rpm
-    repoid: epel
-    size: 3346868
-    checksum: sha256:c2ea5e80b7e571f3c67fa37be5a91d47577e866cdcab077bb282fbc724d04dac
-    name: clamav-freshclam
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://repo.ialab.dsu.edu/epel/9/Everything/x86_64/Packages/c/clamav-lib-1.4.6-1.el9.x86_64.rpm
-    repoid: epel
-    size: 4038569
-    checksum: sha256:8b9e476907952ea41c5f52f9782fec8b3968f388aab5d9b7c5ddc119f4e5ffa0
-    name: clamav-lib
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
-  - url: http://repo.ialab.dsu.edu/epel/9/Everything/x86_64/Packages/c/clamd-1.4.6-1.el9.x86_64.rpm
-    repoid: epel
-    size: 97237
-    checksum: sha256:ae7a582b6be510187d9d9f8b95800fa4fa1995e6fab37d13be324a6a47332e38
-    name: clamd
-    evr: 1.4.6-1.el9
-    sourcerpm: clamav-1.4.6-1.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/containers-common-5.8-1.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
     size: 170139
@@ -295,13 +260,13 @@ arches:
     name: oniguruma
     evr: 6.9.6-1.el9.5
     sourcerpm: oniguruma-6.9.6-1.el9.5.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/s/skopeo-1.22.2-7.el9_8.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/s/skopeo-1.22.2-8.el9_8.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 8623168
-    checksum: sha256:ec499a7f895bc70eae5e50527dbbe6b1ff621ba0599bc8bbf0a55a4661924bbc
+    size: 8615797
+    checksum: sha256:238e02ab0d4538f02daf64af0ba68a571b16103ef06d345ac234a05b40505727
     name: skopeo
-    evr: 2:1.22.2-7.el9_8
-    sourcerpm: skopeo-1.22.2-7.el9_8.src.rpm
+    evr: 2:1.22.2-8.el9_8
+    sourcerpm: skopeo-1.22.2-8.el9_8.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/s/slirp4netns-1.3.3-1.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
     size: 48562
@@ -358,5 +323,40 @@ arches:
     name: shadow-utils-subid
     evr: 2:4.9-16.el9
     sourcerpm: shadow-utils-4.9-16.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/c/clamav-1.4.6-1.el9.x86_64.rpm
+    repoid: epel
+    size: 6823055
+    checksum: sha256:d9ef528e5954a9b2a116118bccb9463866c0a4ab3c4d2681dc06908c276e1795
+    name: clamav
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/c/clamav-filesystem-1.4.6-1.el9.noarch.rpm
+    repoid: epel
+    size: 18617
+    checksum: sha256:8d4bc96248b7956f2370b167aacd80031231b86bddf428930f3256f9771739cb
+    name: clamav-filesystem
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/c/clamav-freshclam-1.4.6-1.el9.x86_64.rpm
+    repoid: epel
+    size: 3346868
+    checksum: sha256:c2ea5e80b7e571f3c67fa37be5a91d47577e866cdcab077bb282fbc724d04dac
+    name: clamav-freshclam
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/c/clamav-lib-1.4.6-1.el9.x86_64.rpm
+    repoid: epel
+    size: 4038569
+    checksum: sha256:8b9e476907952ea41c5f52f9782fec8b3968f388aab5d9b7c5ddc119f4e5ffa0
+    name: clamav-lib
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/c/clamd-1.4.6-1.el9.x86_64.rpm
+    repoid: epel
+    size: 97237
+    checksum: sha256:ae7a582b6be510187d9d9f8b95800fa4fa1995e6fab37d13be324a6a47332e38
+    name: clamd
+    evr: 1.4.6-1.el9
+    sourcerpm: clamav-1.4.6-1.el9.src.rpm
   source: []
   module_metadata: []
