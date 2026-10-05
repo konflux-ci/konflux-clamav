@@ -23,6 +23,7 @@ This repository contains a containerized ClamAV antivirus scanner designed for u
 - **Base Image**: UBI9 minimal with ClamAV packages
 - **ClamAV Server**: Configured daemon for socket-based scanning
 - **Utilities**: Includes jq, skopeo, tar, findutils for CI/CD operations
+- **Archive Extractor**: Recursively unpacks archives for direct, parallel scanning
 - **OpenShift CLI**: Pre-installed oc client for cluster operations
 - **Konflux Policies**: Inherited policy framework from konflux-test
 
@@ -40,6 +41,17 @@ docker run --rm -e MAX_THREADS=4 -v /path/to/scan:/scan quay.io/your-registry/ko
 
 ### In Konflux Pipeline
 This container is designed to be used as part of Konflux build and security scanning pipelines, typically in the security scanning phase of the build process.
+
+### Archive Pre-extraction
+
+The image provides `clamav-extract-archives`, which detects archives by content
+and recursively extracts them beside the original file. Successful extractions
+replace an archive with a directory carrying the `.d` suffix. Archives that
+cannot be extracted remain in place.
+
+```bash
+clamav-extract-archives --workers 8 /path/to/scan
+```
 
 ## Configuration Files
 

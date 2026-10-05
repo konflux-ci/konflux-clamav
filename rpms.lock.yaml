@@ -179,6 +179,13 @@ arches:
     name: clamd
     evr: 1.4.6-1.el9
     sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/p/python3-libarchive-c-5.1-7.el9.noarch.rpm
+    repoid: epel
+    size: 38027
+    checksum: sha256:79548ea53850bbf361da0ff248c34468d6c06c1a4595cc86ec9b27fbd64789e2
+    name: python3-libarchive-c
+    evr: 5.1-7.el9
+    sourcerpm: python-libarchive-c-5.1-7.el9.src.rpm
   source: []
   module_metadata: []
 - arch: x86_64
@@ -358,5 +365,12 @@ arches:
     name: clamd
     evr: 1.4.6-1.el9
     sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/p/python3-libarchive-c-5.1-7.el9.noarch.rpm
+    repoid: epel
+    size: 38027
+    checksum: sha256:79548ea53850bbf361da0ff248c34468d6c06c1a4595cc86ec9b27fbd64789e2
+    name: python3-libarchive-c
+    evr: 5.1-7.el9
+    sourcerpm: python-libarchive-c-5.1-7.el9.src.rpm
   source: []
   module_metadata: []

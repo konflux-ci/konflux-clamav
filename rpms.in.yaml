@@ -31,6 +31,7 @@ packages:
   - openssl
   - pam
   - protobuf-c
+  - python3-libarchive-c
   - shadow-utils-subid
   - skopeo
   - systemd
