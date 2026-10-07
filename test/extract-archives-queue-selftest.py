@@ -4,13 +4,19 @@
 """Verify bounded, lazy submission independently of extraction timing."""
 
 import importlib.util
+from importlib.machinery import SourceFileLoader
 from pathlib import Path
 import sys
 import unittest
 from unittest.mock import patch
 
 
-spec = importlib.util.spec_from_file_location("extractor", sys.argv.pop(1))
+extractor_path = sys.argv.pop(1)
+# The installed executable has no .py suffix, so specify its source loader.
+spec = importlib.util.spec_from_file_location(
+    "extractor", extractor_path,
+    loader=SourceFileLoader("extractor", extractor_path),
+)
 extractor = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(extractor)
 
