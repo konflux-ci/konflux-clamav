@@ -1,5 +1,5 @@
 FROM quay.io/konflux-ci/konflux-test:v1.5.9@sha256:7faaebc542c61704003fecbab81a9c81c9770b4df8c5bba18459fba3f58e9c51 as konflux-test
-FROM registry.access.redhat.com/ubi9/ubi:9.8-1791179325
+FROM registry.access.redhat.com/ubi9/ubi:9.8-1791269371
 
 ENV POLICY_PATH="/project"
 
