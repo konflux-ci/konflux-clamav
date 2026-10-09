@@ -13,6 +13,7 @@ RUN dnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install \
     clamav-server \
     clamav-update \
     jq \
+    python3-libarchive-c \
     skopeo \
     tar \
     && dnf clean all
@@ -59,6 +60,9 @@ RUN sed -i 's|^#LogFile .*|LogFile /var/log/clamav/clamd.log|' /etc/clamd.d/scan
     sed -i 's|^#BytecodeSecurity .*|BytecodeSecurity TrustSigned|' /etc/clamd.d/scan.conf
 
 COPY /start-clamd.sh /start-clamd.sh
+COPY --chmod=0755 /extract-archives.py /usr/local/bin/clamav-extract-archives
+COPY --chmod=0755 test/extract-archives-selftest.sh /extract-archives-selftest.sh
+COPY test/extract-archives-queue-selftest.py /extract-archives-queue-selftest.py
 COPY test/selftest.sh /selftest.sh
 COPY --from=konflux-test /utils.sh /utils.sh
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec

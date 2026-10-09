@@ -48,3 +48,6 @@ while IFS= read -r line; do
 done <<< "${EXPECTED_LINES}"
 
 # END clamscan test
+
+/extract-archives-selftest.sh
+python3 /extract-archives-queue-selftest.py /usr/local/bin/clamav-extract-archives
