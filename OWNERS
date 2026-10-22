@@ -1,0 +1,8 @@
+# Read by the fullsend dispatch workflow when the owners_file
+# authorization provider is enabled in .fullsend/config.yaml.
+# Maintainers are already authorized through their repository
+# permissions, so only contributors without triage or write access
+# need to be listed here. Entries must be plain GitHub logins;
+# team references such as @org/team are not supported.
+reviewers:
+  - rhopp

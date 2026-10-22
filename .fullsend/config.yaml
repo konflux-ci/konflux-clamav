@@ -19,3 +19,5 @@ create_issues:
         repos:
             - konflux-ci/konflux-clamav
             - fullsend-ai/fullsend
+authorization:
+    - provider: owners_file
