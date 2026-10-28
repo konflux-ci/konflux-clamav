@@ -1,0 +1,8 @@
+# Review agent harness overlay.
+# Inherits the default review harness and skips review for the
+# MintMaker bot (red-hat-konflux) to avoid unnecessary agent cost
+# on automated dependency-bump PRs.
+base: https://raw.githubusercontent.com/fullsend-ai/agents/9f4c0eb3dd1207b3c3c3586f413f625a55720990/harness/review.yaml#sha256=9d6503b2060f78cdfdd14720d5ebd9686b1a9f4c7521b15df04c31341a81fb47
+env:
+  runner:
+    REVIEW_SKIP_AUTHORS: "app/red-hat-konflux"
