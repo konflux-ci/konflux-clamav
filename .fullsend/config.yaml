@@ -15,7 +15,7 @@ allowed_remote_resources:
     - https://raw.githubusercontent.com/fullsend-ai/fullsend/
     - https://raw.githubusercontent.com/fullsend-ai/agents/
 agents:
-    - source: .fullsend/harness/review.yaml
+    - source: harness/review.yaml
 create_issues:
     allow_targets:
         repos:
