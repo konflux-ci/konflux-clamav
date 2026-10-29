@@ -44,3 +44,4 @@ A new build of the image is triggered daily.
 - Never make changes that includes sensitive information like API keys, secrets, passwords, etc.
 - Comment changes, but only for logic that is not obvious.
 - Make sure that the Dockerfile is well-formatted and does not include unnecessary layers
+- **Fullsend access policy**: fullsend CI automation access (review dispatch, triage dispatch) is restricted to org/repo collaborators. Do not propose changes that would grant fullsend access to external contributors (e.g., OWNERS files listing external contributor names, enabling the `owners_file` authorization provider for non-collaborators). This is an org-level security policy. External code contributions via standard PRs are welcome — only CI automation authorization expansion is restricted.
