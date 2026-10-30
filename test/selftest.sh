@@ -21,13 +21,18 @@ check_return_code
 
 # Test clamscan output format, we are parsing it so we relay on it (including foramt of virus report)
 echo "Test clamscan output format"
-echo "this is for a test" >> /tmp/virus-test.txt
 
 # we don't have clamDB in this image, fetching full DB would take ages, let's use fake data
-sigtool --sha256 /tmp/virus-test.txt > test.hdb
-clamscan -d test.hdb /tmp/virus-test.txt > clamscan-result.txt || true  # return code is 1
+# The integration task has no workingDir, so cwd is /. The image user cannot write there.
+scan_dir=$(mktemp -d)
+virus_file="${scan_dir}/virus-test.txt"
+signature_file="${scan_dir}/test.hdb"
+result_file="${scan_dir}/clamscan-result.txt"
+echo "this is for a test" > "${virus_file}"
+sigtool --sha256 "${virus_file}" > "${signature_file}"
+clamscan -d "${signature_file}" "${virus_file}" > "${result_file}" || true  # return code is 1
 
-EXPECTED_LINES="/tmp/virus-test.txt: virus-test.txt.UNOFFICIAL FOUND
+EXPECTED_LINES="${virus_file}: virus-test.txt.UNOFFICIAL FOUND
 ----------- SCAN SUMMARY -----------
 Known viruses:
 Engine version:
@@ -41,7 +46,7 @@ Start Date:
 End Date:"
 
 while IFS= read -r line; do
-    if ! grep -- "${line}" clamscan-result.txt; then
+    if ! grep -F -- "${line}" "${result_file}"; then
         echo "Expected pattern not found: \"${line}\"" >&2
         exit 1
     fi

@@ -68,9 +68,9 @@ COPY --from=konflux-test /utils.sh /utils.sh
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 
 COPY clamav-db /var/lib/clamav/
-RUN chown -R clamav:clamav /var/lib/clamav /etc/clamd.d/scan.conf /var/run/clamd.scan /var/log/clamav
-
 COPY /whitelist.ign2 /var/lib/clamav/whitelist.ign2
+RUN chown -R clamav:clamav /var/lib/clamav /var/run/clamd.scan /var/log/clamav
+
 COPY --from=konflux-test project $POLICY_PATH
 
 # TARGETARCH is set automatically by Buildah to the target platform arch
