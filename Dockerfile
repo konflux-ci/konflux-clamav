@@ -68,7 +68,7 @@ COPY --from=konflux-test /utils.sh /utils.sh
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 
 COPY clamav-db /var/lib/clamav/
-RUN chown -R clamav:clamav /var/lib/clamav
+RUN chown -R clamav:clamav /var/lib/clamav /etc/clamd.d/scan.conf /var/run/clamd.scan /var/log/clamav
 
 COPY /whitelist.ign2 /var/lib/clamav/whitelist.ign2
 COPY --from=konflux-test project $POLICY_PATH
@@ -80,5 +80,7 @@ COPY openshift-client-linux-${TARGETARCH}.tar.gz /tmp/oc.tar.gz
 RUN tar -xzvf /tmp/oc.tar.gz -C /usr/bin oc && \
     rm /tmp/oc.tar.gz && \
     chmod +x /usr/bin/oc
+
+USER clamav
 
 ENTRYPOINT ["/start-clamd.sh"]

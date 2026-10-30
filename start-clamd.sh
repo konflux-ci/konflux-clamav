@@ -24,7 +24,7 @@ while [ ! -S "$SOCKET" ]; do
   elapsed=$((elapsed + 1))
   if [ "$elapsed" -ge "$TIMEOUT" ]; then
     echo "Failed to start clamd"
-    exit 0
+    exit 1
   fi
 done
 
