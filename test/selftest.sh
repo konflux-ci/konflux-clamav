@@ -51,3 +51,4 @@ done <<< "${EXPECTED_LINES}"
 
 /extract-archives-selftest.sh
 python3 /extract-archives-queue-selftest.py /usr/local/bin/clamav-extract-archives
+/start-clamd-selftest.sh
