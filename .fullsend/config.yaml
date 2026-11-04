@@ -17,11 +17,10 @@ allowed_remote_resources:
 agents:
     - source: harness/review.yaml
       trigger: >-
-        event.entity.kind == "work_item"
-        && event.transition.kind == "comment_added"
+        event.transition.kind == "comment_added"
+        && has(event.entity.linked_change_proposal)
         && has(event.transition.comment.command)
         && event.transition.comment.command == "/fs-review"
-        && event.state.change_proposal != null
         && event.actor.kind == "human"
         && event.actor.id in [
           "14rcole",
