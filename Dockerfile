@@ -62,15 +62,16 @@ RUN sed -i 's|^#LogFile .*|LogFile /var/log/clamav/clamd.log|' /etc/clamd.d/scan
 COPY /start-clamd.sh /start-clamd.sh
 COPY --chmod=0755 /extract-archives.py /usr/local/bin/clamav-extract-archives
 COPY --chmod=0755 test/extract-archives-selftest.sh /extract-archives-selftest.sh
+COPY --chmod=0755 test/start-clamd-selftest.sh /start-clamd-selftest.sh
 COPY test/extract-archives-queue-selftest.py /extract-archives-queue-selftest.py
 COPY test/selftest.sh /selftest.sh
 COPY --from=konflux-test /utils.sh /utils.sh
 COPY --from=konflux-test /usr/local/bin/ec /usr/local/bin/ec
 
 COPY clamav-db /var/lib/clamav/
-RUN chown -R clamav:clamav /var/lib/clamav
-
 COPY /whitelist.ign2 /var/lib/clamav/whitelist.ign2
+RUN chown -R clamav:clamav /var/lib/clamav /var/run/clamd.scan /var/log/clamav
+
 COPY --from=konflux-test project $POLICY_PATH
 
 # TARGETARCH is set automatically by Buildah to the target platform arch
