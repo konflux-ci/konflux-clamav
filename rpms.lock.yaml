@@ -11,41 +11,41 @@ arches:
     name: bsdtar
     evr: 3.5.3-11.el9_8
     sourcerpm: libarchive-3.5.3-11.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/containers-common-5.8-1.el9.aarch64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/containers-common-5.8-2.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 170106
-    checksum: sha256:aa8c02f753696dd2daa5816e5efee49f9247ccb83da6e7cdaa66e72c4bf02cac
+    size: 174686
+    checksum: sha256:c39f8eb11de2a3d86d02acf2ffba3c7fd9310528fcd6fcb8398c8c98e808b844
     name: containers-common
-    evr: 5:5.8-1.el9
-    sourcerpm: containers-common-5.8-1.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/criu-3.19-4.el9_8.aarch64.rpm
+    evr: 5:5.8-2.el9
+    sourcerpm: containers-common-5.8-2.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/criu-3.19-6.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 552955
-    checksum: sha256:2f4934b17b8fb4bca5f418f383075c37ab3485f2db4e83d78bee808865e5bbd8
+    size: 571462
+    checksum: sha256:138879d95a74da030f2ffeb0b67b96cfd2c22e299c334a3d78023c6472465e5f
     name: criu
-    evr: 3.19-4.el9_8
-    sourcerpm: criu-3.19-4.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/criu-libs-3.19-4.el9_8.aarch64.rpm
+    evr: 3.19-6.el9
+    sourcerpm: criu-3.19-6.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/criu-libs-3.19-6.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 36419
-    checksum: sha256:0c636b32a97822573321095b02d113735b93701d9ccbd3f12bd66dc7c0eee807
+    size: 36803
+    checksum: sha256:681df273d9eb466a20e7b24f019805104245eb52f5922128de619f797e662c41
     name: criu-libs
-    evr: 3.19-4.el9_8
-    sourcerpm: criu-3.19-4.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/crun-1.27-1.el9_8.aarch64.rpm
+    evr: 3.19-6.el9
+    sourcerpm: criu-3.19-6.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/c/crun-1.29.1-1.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 251772
-    checksum: sha256:237be309ac7acd313d8850884d946dab9a265a5ba19ee70c7d4bdd9215d4e892
+    size: 258471
+    checksum: sha256:9e67eeb201a56163384f9700f7680050f7888d21042ebfa37c039d457033c736
     name: crun
-    evr: 1.27-1.el9_8
-    sourcerpm: crun-1.27-1.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/f/fuse-overlayfs-1.16-1.el9_7.aarch64.rpm
+    evr: 1.29.1-1.el9
+    sourcerpm: crun-1.29.1-1.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/f/fuse-overlayfs-1.17-1.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 63393
-    checksum: sha256:7e26a4ef20d9e376a3f84b78d36d1ad6c66ce154e7dfef8757b6aec471a86a4c
+    size: 71966
+    checksum: sha256:64fe89ae55abc9957e5a8a0321f638ebc071162fb2cfa4c1e221203069c00e5c
     name: fuse-overlayfs
-    evr: 1.16-1.el9_7
-    sourcerpm: fuse-overlayfs-1.16-1.el9_7.src.rpm
+    evr: 1.17-1.el9
+    sourcerpm: fuse-overlayfs-1.17-1.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/f/fuse3-3.10.2-9.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
     size: 58189
@@ -88,13 +88,13 @@ arches:
     name: skopeo
     evr: 2:1.22.2-9.el9_8
     sourcerpm: skopeo-1.22.2-9.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/s/slirp4netns-1.3.3-1.el9.aarch64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/s/slirp4netns-1.3.4-1.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 48428
-    checksum: sha256:7955cb422fe44dc41ea42234fa2543668f39b8f036cde00b1ce0b2ebecf4ddf6
+    size: 53123
+    checksum: sha256:ed71a1de9ee5e3ec81528e73202406450330644f6469b5efdbac2ddf033e1f45
     name: slirp4netns
-    evr: 1.3.3-1.el9
-    sourcerpm: slirp4netns-1.3.3-1.el9.src.rpm
+    evr: 1.3.4-1.el9
+    sourcerpm: slirp4netns-1.3.4-1.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/appstream/os/Packages/y/yajl-2.1.0-25.el9.aarch64.rpm
     repoid: ubi-9-appstream-rpms
     size: 42219
@@ -109,13 +109,20 @@ arches:
     name: fuse-common
     evr: 3.10.2-9.el9
     sourcerpm: fuse3-3.10.2-9.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/j/jq-1.6-19.el9_8.2.aarch64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/i/iptables-libs-1.8.10-11.el9_5.aarch64.rpm
     repoid: ubi-9-baseos-rpms
-    size: 191195
-    checksum: sha256:633aaf3e87b19d4a591bd9f47cd81fde8ec49629d3f58932addfc8a134b7949d
+    size: 477723
+    checksum: sha256:73eadf9d16ea9ebb340664873522ef83ad0c28106751783d61c6315a8f0d466f
+    name: iptables-libs
+    evr: 1.8.10-11.el9_5
+    sourcerpm: iptables-1.8.10-11.el9_5.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/j/jq-1.6-21.el9_9.aarch64.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 191163
+    checksum: sha256:170ca96c06f214a31b8f40faa89198680f70cc68a5f30c2980d40cb5c069ce37
     name: jq
-    evr: 1.6-19.el9_8.2
-    sourcerpm: jq-1.6-19.el9_8.2.src.rpm
+    evr: 1.6-21.el9_9
+    sourcerpm: jq-1.6-21.el9_9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/k/kmod-28-11.el9.aarch64.rpm
     repoid: ubi-9-baseos-rpms
     size: 125869
@@ -123,6 +130,20 @@ arches:
     name: kmod
     evr: 28-11.el9
     sourcerpm: kmod-28-11.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/l/libnetfilter_conntrack-1.0.9-1.el9.aarch64.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 61151
+    checksum: sha256:28d0047c487c8d8bc6b9544fa0a6ac837a50c309641c689e834a4959d6f1ac01
+    name: libnetfilter_conntrack
+    evr: 1.0.9-1.el9
+    sourcerpm: libnetfilter_conntrack-1.0.9-1.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/l/libnfnetlink-1.0.1-23.el9_5.aarch64.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 31790
+    checksum: sha256:3bc75fd1a2cf80c51709901538ad65555406ffb0805a91fd59ce02f1a8ddd67c
+    name: libnfnetlink
+    evr: 1.0.1-23.el9_5
+    sourcerpm: libnfnetlink-1.0.1-23.el9_5.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/l/libnl3-3.11.0-1.el9.aarch64.rpm
     repoid: ubi-9-baseos-rpms
     size: 363241
@@ -137,13 +158,13 @@ arches:
     name: protobuf-c
     evr: 1.3.3-13.el9
     sourcerpm: protobuf-c-1.3.3-13.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/s/shadow-utils-subid-4.9-16.el9.aarch64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/s/shadow-utils-subid-4.9-17.el9.aarch64.rpm
     repoid: ubi-9-baseos-rpms
-    size: 85318
-    checksum: sha256:74ace5717c8bc87aedf563a93373eb71abc5893d516a9ea61760ba429726236c
+    size: 91845
+    checksum: sha256:123b5a0fd4ba4c15720c22f1b58d74eda96f12431ebee3d8e7392e8fdf9ba425
     name: shadow-utils-subid
-    evr: 2:4.9-16.el9
-    sourcerpm: shadow-utils-4.9-16.el9.src.rpm
+    evr: 2:4.9-17.el9
+    sourcerpm: shadow-utils-4.9-17.el9.src.rpm
   - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/c/clamav-1.4.6-1.el9.aarch64.rpm
     repoid: epel
     size: 3681046
@@ -179,6 +200,20 @@ arches:
     name: clamd
     evr: 1.4.6-1.el9
     sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/i/iptables-legacy-1.8.10-11.1.el9.aarch64.rpm
+    repoid: epel
+    size: 49344
+    checksum: sha256:4ac1cf327555ad8e8f49288668e4c31bfba2f795481c3d4403f52a43eb2e1084
+    name: iptables-legacy
+    evr: 1.8.10-11.1.el9
+    sourcerpm: iptables-epel-1.8.10-11.1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/i/iptables-legacy-libs-1.8.10-11.1.el9.aarch64.rpm
+    repoid: epel
+    size: 38474
+    checksum: sha256:f49496583ac1cd3b743591bc77b05553f2a241a1ebfb12617e4a1a5206485c4e
+    name: iptables-legacy-libs
+    evr: 1.8.10-11.1.el9
+    sourcerpm: iptables-epel-1.8.10-11.1.el9.src.rpm
   - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/aarch64/Packages/p/python3-libarchive-c-5.1-7.el9.noarch.rpm
     repoid: epel
     size: 38027
@@ -197,41 +232,41 @@ arches:
     name: bsdtar
     evr: 3.5.3-11.el9_8
     sourcerpm: libarchive-3.5.3-11.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/containers-common-5.8-1.el9.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/containers-common-5.8-2.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 170139
-    checksum: sha256:6db3b80aff7a892ea57ce84c95d0cd62bd70f43b1824009bc9a2ba47bca629d2
+    size: 174748
+    checksum: sha256:0d78b099a8fb83d405e6a9782ec28fdf5c33ee3a3a618ea6289e686dc397e0fa
     name: containers-common
-    evr: 5:5.8-1.el9
-    sourcerpm: containers-common-5.8-1.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/criu-3.19-4.el9_8.x86_64.rpm
+    evr: 5:5.8-2.el9
+    sourcerpm: containers-common-5.8-2.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/criu-3.19-6.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 575825
-    checksum: sha256:8b5d9ead51b4543ed5368b969ad0764f463a5ab448f552610c44cd8e4cde3acf
+    size: 581615
+    checksum: sha256:ab52daaa42441eba8b89ee7e708329d27ea88a6c62741a94fd7fe448062e79c4
     name: criu
-    evr: 3.19-4.el9_8
-    sourcerpm: criu-3.19-4.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/criu-libs-3.19-4.el9_8.x86_64.rpm
+    evr: 3.19-6.el9
+    sourcerpm: criu-3.19-6.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/criu-libs-3.19-6.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 37299
-    checksum: sha256:3a9f645c6d495fc465fd65bfe02170e93552567bb45745bc6b8bf1402cd35464
+    size: 37423
+    checksum: sha256:9c22eadcc75b10f36ca2a9984ba2c7ab7fcdfe61c7eff5bc37f183eb378e2a03
     name: criu-libs
-    evr: 3.19-4.el9_8
-    sourcerpm: criu-3.19-4.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/crun-1.27-1.el9_8.x86_64.rpm
+    evr: 3.19-6.el9
+    sourcerpm: criu-3.19-6.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/crun-1.29.1-1.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 268116
-    checksum: sha256:0fc29837716c71995f2e7ffe6d11d937260c0eea9fa07beae3d2671cb7363ebd
+    size: 276031
+    checksum: sha256:51bb696c011e681e538fbcc4d0011cf68058cca088b708fefb5df5e613ce68c6
     name: crun
-    evr: 1.27-1.el9_8
-    sourcerpm: crun-1.27-1.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/f/fuse-overlayfs-1.16-1.el9_7.x86_64.rpm
+    evr: 1.29.1-1.el9
+    sourcerpm: crun-1.29.1-1.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/f/fuse-overlayfs-1.17-1.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 67299
-    checksum: sha256:e5069c6983d99bbd995748e9cd50712b8daaef07750d270c65246278b71fc37a
+    size: 75637
+    checksum: sha256:e156ef0cf1b7931913aeb6e10b7e36d8db547ffabdbc21a1a9ed875776a06d4e
     name: fuse-overlayfs
-    evr: 1.16-1.el9_7
-    sourcerpm: fuse-overlayfs-1.16-1.el9_7.src.rpm
+    evr: 1.17-1.el9
+    sourcerpm: fuse-overlayfs-1.17-1.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/f/fuse3-3.10.2-9.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
     size: 58706
@@ -274,13 +309,13 @@ arches:
     name: skopeo
     evr: 2:1.22.2-9.el9_8
     sourcerpm: skopeo-1.22.2-9.el9_8.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/s/slirp4netns-1.3.3-1.el9.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/s/slirp4netns-1.3.4-1.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 48562
-    checksum: sha256:ba91e6e0d70be19e5f9a44e0a8f6791c49b685b42a1ad2dc64ec50e4800c7d1a
+    size: 53211
+    checksum: sha256:4e856a7167dd94f9fd3c98a25323f956152bb07055488cc642d39a8cb50a8dfb
     name: slirp4netns
-    evr: 1.3.3-1.el9
-    sourcerpm: slirp4netns-1.3.3-1.el9.src.rpm
+    evr: 1.3.4-1.el9
+    sourcerpm: slirp4netns-1.3.4-1.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/y/yajl-2.1.0-25.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
     size: 42487
@@ -295,13 +330,20 @@ arches:
     name: fuse-common
     evr: 3.10.2-9.el9
     sourcerpm: fuse3-3.10.2-9.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/j/jq-1.6-19.el9_8.2.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/i/iptables-libs-1.8.10-11.el9_5.x86_64.rpm
     repoid: ubi-9-baseos-rpms
-    size: 197453
-    checksum: sha256:9793a39a4746a09ba89c3d9ccc70150ac6c878286deee26d7e3aabede4666417
+    size: 476678
+    checksum: sha256:3e79ca4cc3d35c1f1e0ac6c9f05c5be56b7ab6dd1f8ae719a21ec1b9e3bfa018
+    name: iptables-libs
+    evr: 1.8.10-11.el9_5
+    sourcerpm: iptables-1.8.10-11.el9_5.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/j/jq-1.6-21.el9_9.x86_64.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 197415
+    checksum: sha256:bbf3a251f6bae8fe8d73e6e4136ffac09dedbc24c2354c8f869d5d6576024f3f
     name: jq
-    evr: 1.6-19.el9_8.2
-    sourcerpm: jq-1.6-19.el9_8.2.src.rpm
+    evr: 1.6-21.el9_9
+    sourcerpm: jq-1.6-21.el9_9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/k/kmod-28-11.el9.x86_64.rpm
     repoid: ubi-9-baseos-rpms
     size: 127775
@@ -309,6 +351,20 @@ arches:
     name: kmod
     evr: 28-11.el9
     sourcerpm: kmod-28-11.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libnetfilter_conntrack-1.0.9-1.el9.x86_64.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 62066
+    checksum: sha256:beeb73e78390077c6afd9ed6177bad8bad278dbfaae9d90edf7243cdf6a44a3f
+    name: libnetfilter_conntrack
+    evr: 1.0.9-1.el9
+    sourcerpm: libnetfilter_conntrack-1.0.9-1.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libnfnetlink-1.0.1-23.el9_5.x86_64.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 32236
+    checksum: sha256:177882bfe48c9c9effc7b1bce6b58b2466988c53e400c07fb1ba2d3a4ebe6f40
+    name: libnfnetlink
+    evr: 1.0.1-23.el9_5
+    sourcerpm: libnfnetlink-1.0.1-23.el9_5.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libnl3-3.11.0-1.el9.x86_64.rpm
     repoid: ubi-9-baseos-rpms
     size: 376137
@@ -323,13 +379,13 @@ arches:
     name: protobuf-c
     evr: 1.3.3-13.el9
     sourcerpm: protobuf-c-1.3.3-13.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/s/shadow-utils-subid-4.9-16.el9.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/s/shadow-utils-subid-4.9-17.el9.x86_64.rpm
     repoid: ubi-9-baseos-rpms
-    size: 86705
-    checksum: sha256:7ec945faa9fb963f46c863e8f32dd9192e60b548e126296b832b3ecd75f47b47
+    size: 93258
+    checksum: sha256:c4efe2980b1f8e18ebf2a83e08f2d4601aa3c0aeedad1484dffac1034f89401e
     name: shadow-utils-subid
-    evr: 2:4.9-16.el9
-    sourcerpm: shadow-utils-4.9-16.el9.src.rpm
+    evr: 2:4.9-17.el9
+    sourcerpm: shadow-utils-4.9-17.el9.src.rpm
   - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/c/clamav-1.4.6-1.el9.x86_64.rpm
     repoid: epel
     size: 6823055
@@ -365,6 +421,20 @@ arches:
     name: clamd
     evr: 1.4.6-1.el9
     sourcerpm: clamav-1.4.6-1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/i/iptables-legacy-1.8.10-11.1.el9.x86_64.rpm
+    repoid: epel
+    size: 51273
+    checksum: sha256:0763c43bb02af90f102f81e21accea6d963de235d3fd089852bea28d9cfc3008
+    name: iptables-legacy
+    evr: 1.8.10-11.1.el9
+    sourcerpm: iptables-epel-1.8.10-11.1.el9.src.rpm
+  - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/i/iptables-legacy-libs-1.8.10-11.1.el9.x86_64.rpm
+    repoid: epel
+    size: 39292
+    checksum: sha256:cc5b752bd2bd4cb3c959ef9598f65164a3aba85c86ab8934a886de1659d44603
+    name: iptables-legacy-libs
+    evr: 1.8.10-11.1.el9
+    sourcerpm: iptables-epel-1.8.10-11.1.el9.src.rpm
   - url: https://d2lzkl7pfhq30w.cloudfront.net/pub/epel/9/Everything/x86_64/Packages/p/python3-libarchive-c-5.1-7.el9.noarch.rpm
     repoid: epel
     size: 38027
